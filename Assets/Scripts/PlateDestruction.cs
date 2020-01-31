@@ -20,7 +20,7 @@ public class PlateDestruction : MonoBehaviour
         }
     }
 
-    void O
+    //void O
     //foreach(var rigidbody in transform.GetComponentsInChildren<Rigidbody>())
     //    {
     //        rigidbody.transform.localPosition = Vector3.zero;
