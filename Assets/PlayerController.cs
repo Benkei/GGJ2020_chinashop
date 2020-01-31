@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public Transform cameraTransform;
     public float movementSpeed = 5;
+    public float gravity = 20.0f;
     float yaw;
     float pitch;
     Vector3 movementAxis;
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, transform.forward);
-        controller.Move(rot * movementAxis * movementSpeed * Time.deltaTime);
+        controller.Move(rot * new Vector3(movementAxis.x, -gravity, movementAxis.y) * movementSpeed * Time.deltaTime);
     }
 
     void OnLook(InputValue value)
@@ -36,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        var axis = value.Get<Vector2>();
-        movementAxis = new Vector3(axis.x, 0, axis.y);
+        movementAxis = value.Get<Vector2>();
     }
 }
