@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     public Transform cameraTransform;
+    public float movementSpeed = 5;
     float yaw;
     float pitch;
     Vector3 movementAxis;
+    CharacterController controller;
+
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+    }
 
     void Update()
     {
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, transform.forward);
-        transform.position += rot * movementAxis * Time.deltaTime;
+        controller.Move(rot * movementAxis * movementSpeed * Time.deltaTime);
     }
 
     void OnLook(InputValue value)
