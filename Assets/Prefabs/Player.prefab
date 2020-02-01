@@ -148,7 +148,7 @@ MonoBehaviour:
   loading: {fileID: 1977804165896458480}
   shooting: {fileID: 8578504847305309953}
   cooldown: {fileID: 5494141861928509499}
-  Fan: {fileID: 0}
+  Fan: {fileID: 8417907770988215253}
 --- !u!108 &7465409086652334248
 Light:
   m_ObjectHideFlags: 0
@@ -5926,7 +5926,7 @@ PrefabInstance:
     - target: {fileID: 3160505221250294962, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.13052616
       objectReference: {fileID: 0}
     - target: {fileID: 3160505221250294962, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb,
         type: 3}
@@ -5941,18 +5941,29 @@ PrefabInstance:
     - target: {fileID: 3160505221250294962, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9914449
       objectReference: {fileID: 0}
     - target: {fileID: 3160505221250294962, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3160505221250294962, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb, type: 3}
 --- !u!4 &6086834399567193385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1225668963024571955}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8417907770988215253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7336392281916552678, guid: 0b4e89c7d6b0f1f41b7cf48f75502fcb,
     type: 3}
   m_PrefabInstance: {fileID: 1225668963024571955}
   m_PrefabAsset: {fileID: 0}
