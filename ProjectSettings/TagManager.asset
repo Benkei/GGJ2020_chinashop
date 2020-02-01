@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Teller
+  - Plate
   layers:
   - Default
   - TransparentFX
