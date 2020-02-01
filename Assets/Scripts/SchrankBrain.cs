@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class SchrankBrain : MonoBehaviour
 {
-	public List<PlatePoint> sockets;
+	List<PlatePoint> sockets;
 	[SerializeField]
 	int plateCount = 0;
 
 	void Start()
 	{
+		sockets = GetComponentsInChildren<PlatePoint>().ToList();
 		foreach (var socket in sockets)
 		{
 			if (socket.filled) plateCount++;
@@ -25,15 +26,13 @@ public class SchrankBrain : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
-
 
 	void OnTriggerEnter(Collider other)
 	{
+		if (other.tag != "Elephant")
+		{
+			return;
+		}
 		Debug.Log(other.name);
 		foreach (var socket in sockets.OrderBy(x => Random.value))
 		{

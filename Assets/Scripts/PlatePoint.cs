@@ -15,11 +15,9 @@ public class PlatePoint : MonoBehaviour
     public UnityEvent onEmptied;
     Collider triggerCol;
 
-    IEnumerator Start()
+    void Start()
     {
         triggerCol = GetComponent<Collider>();
-        yield return new WaitForSeconds(5);
-        PushPlate();
     }
 
     void OnTriggerEnter(Collider other)

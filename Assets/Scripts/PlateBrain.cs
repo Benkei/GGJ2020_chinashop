@@ -15,6 +15,11 @@ public class PlateBrain : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
+		if (!enabled)
+		{
+			return;
+		}
+
 		ExplodeModel(collision.GetContact(0).point);
 	}
 
