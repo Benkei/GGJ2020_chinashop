@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26dc5672feeaf844088569cbe56b5547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: Teller
   BaseModel: {fileID: 3737264755817474847}
   BrokenModel: {fileID: 3737264756481848249}
 --- !u!114 &1031736706
@@ -181,8 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6acfc0b79d85804491e0ceabd830d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseModel: {fileID: 3737264755817474847}
-  BrokenModel: {fileID: 3737264756481848249}
   RepairTime: 1
 --- !u!54 &4682762198204852895
 Rigidbody:

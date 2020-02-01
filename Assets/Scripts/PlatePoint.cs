@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class PlatePoint : MonoBehaviour
 {
+    public string plateType;
     public PlateBrain plate;
     public Transform plateSocket;
     public bool filled => plate != null;
@@ -25,8 +26,7 @@ public class PlatePoint : MonoBehaviour
         {
             if (other.TryGetComponent(out plate))
             {
-                
-                if (!plate.BaseModel.activeSelf)
+                if (!plate.BaseModel.activeSelf || plate.type != plateType)
                 {
                     plate = null;
                     return;

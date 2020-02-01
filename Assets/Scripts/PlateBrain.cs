@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlateBrain : MonoBehaviour
 {
+	public string type;
 	public GameObject BaseModel;
 	public GameObject BrokenModel;
 
