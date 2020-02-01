@@ -53,9 +53,10 @@ public class LaserScript : MonoBehaviour
 			{
 				line.enabled = true;
 				light.enabled = true;
+                
 
-                Rigidbody rigidb = Fan.GetComponent<Rigidbody>();
-                rigidb.transform.rotation.Set(0, 10, 0, 0);
+                //Rigidbody rigidb = Fan.GetComponent<Rigidbody>();
+                //rigidb.transform.rotation.Set(0, 10, 0, 0);
                 
 
                 if (shooting.isPlaying == false)
