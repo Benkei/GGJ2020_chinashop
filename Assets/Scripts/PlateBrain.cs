@@ -32,10 +32,11 @@ public class PlateBrain : MonoBehaviour
 		{
 			BrokenModel.SetActive(true);
 
-			//Debug.Log("explode " + posi);
-
+			var rigied = BrokenModel.GetComponent<Rigidbody>();
 			foreach (var item in BrokenModel.GetComponentsInChildren<Rigidbody>())
 			{
+				item.velocity = rigied.velocity;
+				item.angularVelocity = rigied.angularVelocity;
 				item.AddExplosionForce(100, contact, 100f);
 			}
 		}

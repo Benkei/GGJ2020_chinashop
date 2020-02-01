@@ -51,8 +51,8 @@ public class ElephantBrain : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
-	{
-		Debug.Log(other.name);
-	}
+	//void OnTriggerEnter(Collider other)
+	//{
+	//	//Debug.Log(other.name);
+	//}
 }
