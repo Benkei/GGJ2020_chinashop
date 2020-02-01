@@ -12,15 +12,14 @@ public class LaserScript : MonoBehaviour
 	public AudioSource loading;
 	public AudioSource shooting;
 	public AudioSource cooldown;
-    public GameObject Fan;
-    
+	public GameObject Fan;
 
-    bool exit;
 
-	// Start is called before the first frame update
+	bool exit;
+
 	void Start()
 	{
-        
+
 		Ps = GetComponent<ParticleSystem>();
 		line = GetComponent<LineRenderer>();
 		light = GetComponent<Light>();
@@ -32,11 +31,10 @@ public class LaserScript : MonoBehaviour
 	{
 		if (value.isPressed)
 		{
-			Debug.Log("Funktioniert");
 			Ps.Play();
 			loading.Play();
 			exit = true;
-			StartCoroutine("FireLaser");
+			StartCoroutine(FireLaser());
 		}
 		else
 		{
@@ -45,27 +43,26 @@ public class LaserScript : MonoBehaviour
 	}
 	IEnumerator FireLaser()
 	{
+		var wait = new WaitForEndOfFrame();
 		while (exit)
 		{
-            
-            Debug.Log("ja geht geht");
-            if (loading.isPlaying == false)
+			if (loading.isPlaying == false)
 			{
 				line.enabled = true;
 				light.enabled = true;
 
-                Fan.transform.localRotation *= Quaternion.AngleAxis(-1000 * Time.deltaTime, Vector3.up);
-                
+				Fan.transform.localRotation *= Quaternion.AngleAxis(-1000 * Time.deltaTime, Vector3.up);
 
-                if (shooting.isPlaying == false)
+
+				if (shooting.isPlaying == false)
 				{
 					shooting.Play();
 				}
-				Debug.Log("ja geht");
+
 				line.material.mainTextureOffset = new Vector2(0, Time.time);
 				Ray ray = new Ray(transform.position, transform.forward);
 				RaycastHit hit;
-				Debug.Log("macht er auch");
+
 				line.SetPosition(0, ray.origin);
 
 				if (Physics.Raycast(ray, out hit, laserRange))
@@ -74,8 +71,8 @@ public class LaserScript : MonoBehaviour
 
 				else
 					line.SetPosition(1, ray.GetPoint(laserRange));
-				yield return null;
-				Debug.Log("Funktioniert auch");
+
+				yield return wait;
 			}
 			yield return null;
 
