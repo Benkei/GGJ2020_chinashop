@@ -17,7 +17,10 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Transform grabbed = null;
     Vector3 grabStartPoint;
+    Vector3 position;
+    Vector3 positionneu;
     float grabbedTime;
+    public AudioSource Step;
 
     private void Start()
     {
@@ -26,9 +29,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, transform.forward);
         controller.Move(rot * new Vector3(movementAxis.x, -gravity, movementAxis.y) * movementSpeed * Time.deltaTime);
-        if (grabbed)
+        positionneu = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        if (position != positionneu && Step.isPlaying == false)
+        {
+            Step.Play();
+        }
         {
             grabbed.transform.position = Vector3.Lerp(grabStartPoint, grabPoint.position, Mathf.Min(1, Time.time - grabbedTime));
         }
