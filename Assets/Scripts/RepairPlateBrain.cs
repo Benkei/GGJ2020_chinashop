@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RepairPlateBrain : MonoBehaviour
 {
+	public GameObject BaseModel;
 	public GameObject BrokenModel;
 
 	public float RepairTime = 1.0f;
@@ -65,5 +66,11 @@ public class RepairPlateBrain : MonoBehaviour
 			yield return null;
 		}
 
+		BrokenModel.SetActive(false);
+		foreach (Transform child in BrokenModel.transform)
+		{
+			child.GetComponent<Rigidbody>().isKinematic = false;
+		}
+		BaseModel.SetActive(true);
 	}
 }

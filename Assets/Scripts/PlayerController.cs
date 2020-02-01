@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
                 grabbed.isKinematic = false;
                 if (Time.time - grabbedTime > 1)
                 {
-                    grabbed.AddForce(grabPoint.forward * 1000);
+                    grabbed.AddForce(cameraTransform.forward * 1000);
                 }
             }
             grabbed = null;

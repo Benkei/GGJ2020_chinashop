@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,5 +35,13 @@ public class SchrankBrain : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		Debug.Log(other.name);
+		foreach (var socket in sockets.OrderBy(x => Random.value))
+		{
+			if (socket.filled)
+			{
+				socket.PushPlate();
+				break;
+			}
+		}
 	}
 }
