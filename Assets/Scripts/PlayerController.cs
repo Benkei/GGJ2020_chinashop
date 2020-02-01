@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     float pitch;
     Vector3 movementAxis;
     CharacterController controller;
-    Transform grabbed = null;
+    Rigidbody grabbed = null;
     Vector3 grabStartPoint;
     float grabbedTime;
 
@@ -53,36 +53,41 @@ public class PlayerController : MonoBehaviour
 
     void OnFire(InputValue value)
     {
-        if (grabbed)
+        if (value.isPressed)
         {
-            return;
-        }
-        if (Physics.Raycast(camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)), out var hit))
-        {
-            Debug.Log(hit);
-            if (hit.collider.CompareTag(plateTag))
+            if (grabbed)
             {
-                grabbed = hit.transform;
-                grabStartPoint = hit.transform.position;
-                grabbedTime = Time.time;
+                return;
+            }
+            if (Physics.Raycast(camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)), out var hit))
+            {
+                Debug.Log(hit);
+                if (hit.collider.CompareTag(plateTag))
+                {
+                    grabbed = hit.rigidbody;
+                    grabbed.isKinematic = true;
+                    grabStartPoint = hit.transform.position;
+                    grabbedTime = Time.time;
+                }
             }
         }
-    }
-
-    void OnAltFire(InputValue value)
-    {
-        grabbed = null;
+        else
+        {
+            if (grabbed)
+            {
+                grabbed.isKinematic = false;
+                if (Time.time - grabbedTime > 1)
+                {
+                    grabbed.AddForce(grabPoint.forward * 1000);
+                }
+            }
+            grabbed = null;
+        }
     }
 
     static Vector3 SmoothGrab(Vector3 start, Vector3 target, float t)
     {
         return Vector3.Lerp(start, target, EaseInOutElastic(t));
-        if (t < 0.8f)
-        {
-            return Vector3.Lerp(start, target, Mathf.SmoothStep(0, 0.8f, t * 1 / 0.8f));
-        }
-
-        return Vector3.Lerp(start, target, t);
     }
 
     static float EaseInOutElastic(float k)
