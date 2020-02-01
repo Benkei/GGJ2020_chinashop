@@ -51,7 +51,7 @@ public class PlatePoint : MonoBehaviour
         {
             other.transform.position = Vector3.Lerp(start, plateSocket.position, t);
             other.transform.rotation = Quaternion.Slerp(startRot, plateSocket.rotation, t);
-            t += Time.deltaTime;
+            t += Time.deltaTime * 3;
             yield return null;
         }
         other.transform.position = plateSocket.position;
