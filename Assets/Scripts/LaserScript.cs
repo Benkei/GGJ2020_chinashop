@@ -53,10 +53,8 @@ public class LaserScript : MonoBehaviour
 			{
 				line.enabled = true;
 				light.enabled = true;
-                
 
-                //Rigidbody rigidb = Fan.GetComponent<Rigidbody>();
-                //rigidb.transform.rotation.Set(0, 10, 0, 0);
+                Fan.transform.localRotation *= Quaternion.AngleAxis(-1000 * Time.deltaTime, Vector3.up);
                 
 
                 if (shooting.isPlaying == false)
