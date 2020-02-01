@@ -6,8 +6,7 @@ using UnityEngine.AI;
 public class AgentBrain : MonoBehaviour
 {
 	public GameObject Target;
-
-
+	
 	void Awake()
 	{
 		var agent = GetComponent<NavMeshAgent>();

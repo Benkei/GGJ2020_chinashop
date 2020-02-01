@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     float pitch;
     Vector3 movementAxis;
     CharacterController controller;
-    Transform grabbed = null;
+    Rigidbody grabbed = null;
     Vector3 grabStartPoint;
     Vector3 position;
     Vector3 positionneu;
@@ -38,7 +38,8 @@ public class PlayerController : MonoBehaviour
             Step.Play();
         }
         {
-            grabbed.transform.position = Vector3.Lerp(grabStartPoint, grabPoint.position, Mathf.Min(1, Time.time - grabbedTime));
+            grabbed.transform.position = SmoothGrab(grabStartPoint, grabPoint.position, Mathf.Min(1, Time.time - grabbedTime));
+            grabbed.transform.rotation = Quaternion.Slerp(grabbed.transform.rotation, grabPoint.transform.rotation, Time.deltaTime * 10);
         }
     }
 
@@ -56,28 +57,51 @@ public class PlayerController : MonoBehaviour
     {
         movementAxis = value.Get<Vector2>();
     }
-    const string plateTag = "PlatePiece";
+    const string plateTag = "Teller";
 
     void OnFire(InputValue value)
     {
-        if (grabbed)
+        if (value.isPressed)
         {
-            return;
-        }
-        if (Physics.Raycast(camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)), out var hit))
-        {
-            Debug.Log(hit);
-            if (hit.collider.CompareTag(plateTag) || true)
+            if (grabbed)
             {
-                grabbed = hit.transform;
-                grabStartPoint = hit.transform.position;
-                grabbedTime = Time.time;
+                return;
             }
+            if (Physics.Raycast(camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)), out var hit))
+            {
+                Debug.Log(hit);
+                if (hit.collider.CompareTag(plateTag))
+                {
+                    grabbed = hit.rigidbody;
+                    grabbed.isKinematic = true;
+                    grabStartPoint = hit.transform.position;
+                    grabbedTime = Time.time;
+                }
+            }
+        }
+        else
+        {
+            if (grabbed)
+            {
+                grabbed.isKinematic = false;
+                if (Time.time - grabbedTime > 1)
+                {
+                    grabbed.AddForce(grabPoint.forward * 1000);
+                }
+            }
+            grabbed = null;
         }
     }
 
-    void OnAltFire(InputValue value)
+    static Vector3 SmoothGrab(Vector3 start, Vector3 target, float t)
     {
-        grabbed = null;
+        return Vector3.Lerp(start, target, EaseInOutElastic(t));
     }
+
+    static float EaseInOutElastic(float k)
+    {
+        if ((k *= 2f) < 1f) return -0.5f * Mathf.Pow(2f, 10f * (k -= 1f)) * Mathf.Sin((k - 0.1f) * (2f * Mathf.PI) / 0.4f);
+        return Mathf.Pow(2f, -10f * (k -= 1f)) * Mathf.Sin((k - 0.1f) * (2f * Mathf.PI) / 0.4f) * 0.5f + 1f;
+    }
+
 }
