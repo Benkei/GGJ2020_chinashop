@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class SchrankBrain : MonoBehaviour
 {
-	// Start is called before the first frame update
+	public List<PlatePoint> sockets;
+	[SerializeField]
+	int plateCount = 0;
+
 	void Start()
 	{
-
+		foreach (var socket in sockets)
+		{
+			if (socket.filled) plateCount++;
+			socket.onFilled.AddListener(() =>
+			{
+				plateCount++;
+			});
+			socket.onEmptied.AddListener(() =>
+			{
+				plateCount--;
+			});
+		}
 	}
 
 	// Update is called once per frame
