@@ -68,15 +68,24 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
-            if (Physics.Raycast(camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)), out var hit))
+            if (Physics.Raycast(
+               camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)),
+               out var hit))
             {
                 Debug.Log(hit);
                 if (hit.collider.CompareTag(plateTag))
                 {
-                    grabbed = hit.rigidbody;
+              var repair = hit.rigidbody.GetComponentInParent<RepairPlateBrain>();
+
+               repair.StartRepair(hit.point);
+
+               var root = hit.rigidbody.GetComponentInParent<PlateBrain>();
+
+                    grabbed = root.GetComponent<Rigidbody>();
                     grabbed.isKinematic = true;
-                    grabStartPoint = hit.transform.position;
+                    grabStartPoint = root.transform.position;
                     grabbedTime = Time.time;
+
                 }
             }
         }
