@@ -15,21 +15,36 @@ public class PlateBrain : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
+		ExplodeModel(collision.GetContact(0).point);
+	}
+
+	public void ExplodeModel(Vector3 contact)
+	{
 		BaseModel.SetActive(false);
 
 		if (!BrokenModel.activeSelf)
 		{
 			BrokenModel.SetActive(true);
-			var posi = collision.GetContact(0).point;
 
 			//Debug.Log("explode " + posi);
 
 			foreach (var item in BrokenModel.GetComponentsInChildren<Rigidbody>())
 			{
-				item.AddExplosionForce(100, posi, 100f);
+				item.AddExplosionForce(100, contact, 100f);
 			}
 		}
 	}
 
+	public void ResetModel()
+	{
+		BaseModel.SetActive(true);
+		BrokenModel.SetActive(false);
 
+		foreach (Transform child in BrokenModel.transform)
+		{
+			child.GetComponent<Rigidbody>().isKinematic = false;
+			child.localPosition = Vector3.zero;
+			child.localRotation = Quaternion.identity;
+		}
+	}
 }

@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlateBrain))]
 public class RepairPlateBrain : MonoBehaviour
 {
-	public GameObject BaseModel;
-	public GameObject BrokenModel;
-
 	public float RepairTime = 1.0f;
 
-	// Start is called before the first frame update
-	void Start()
+	private PlateBrain mainBrain;
+
+	private void Awake()
 	{
-
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
+		mainBrain = GetComponent<PlateBrain>();
 	}
 
 	public void StartRepair(Vector3 newRootPoint)
@@ -31,7 +24,7 @@ public class RepairPlateBrain : MonoBehaviour
 	{
 		var childPos = new List<Vector3>();
 
-		foreach (Transform child in BrokenModel.transform)
+		foreach (Transform child in mainBrain.BrokenModel.transform)
 		{
 			child.GetComponent<Rigidbody>().isKinematic = true;
 			childPos.Add(child.position);
@@ -39,9 +32,9 @@ public class RepairPlateBrain : MonoBehaviour
 
 		transform.position = newRootPoint;
 
-		for (int i = 0; i < BrokenModel.transform.childCount; i++)
+		for (int i = 0; i < mainBrain.BrokenModel.transform.childCount; i++)
 		{
-			var child = BrokenModel.transform.GetChild(i);
+			var child = mainBrain.BrokenModel.transform.GetChild(i);
 			child.position = childPos[i];
 		}
 
@@ -52,13 +45,13 @@ public class RepairPlateBrain : MonoBehaviour
 
 			var blend = time / RepairTime;
 			blend = Mathf.Clamp01(blend);
-			foreach (Transform child in BrokenModel.transform)
+			foreach (Transform child in mainBrain.BrokenModel.transform)
 			{
 				child.localPosition = Vector3.Lerp(child.localPosition, Vector3.zero, blend);
 				child.localRotation = Quaternion.Slerp(child.localRotation, Quaternion.identity, blend);
 			}
 
-			if(blend == 1)
+			if (blend == 1)
 			{
 				break;
 			}
@@ -66,11 +59,6 @@ public class RepairPlateBrain : MonoBehaviour
 			yield return null;
 		}
 
-		BrokenModel.SetActive(false);
-		foreach (Transform child in BrokenModel.transform)
-		{
-			child.GetComponent<Rigidbody>().isKinematic = false;
-		}
-		BaseModel.SetActive(true);
+		mainBrain.ResetModel();
 	}
 }
