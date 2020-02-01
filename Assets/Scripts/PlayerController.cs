@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         movementAxis = value.Get<Vector2>();
     }
-    const string plateTag = "PlatePiece";
+    const string plateTag = "Teller";
 
     void OnFire(InputValue value)
     {
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)), out var hit))
         {
             Debug.Log(hit);
-            if (hit.collider.CompareTag(plateTag) || true)
+            if (hit.collider.CompareTag(plateTag))
             {
                 grabbed = hit.transform;
                 grabStartPoint = hit.transform.position;
