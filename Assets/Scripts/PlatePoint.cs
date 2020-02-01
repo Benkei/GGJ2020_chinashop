@@ -29,9 +29,9 @@ public class PlatePoint : MonoBehaviour
             {
                 other.attachedRigidbody.isKinematic = true;
                 other.tag = "Untagged";
+                StartCoroutine(Snap(other));
                 _filled = true;
                 onFilled?.Invoke();
-                StartCoroutine(Snap(other));
             }
         }
     }
@@ -64,6 +64,7 @@ public class PlatePoint : MonoBehaviour
         {
             yield break;
         }
+        _filled = false;
         triggerCol.enabled = false;
         var rigid = plate.GetComponent<Rigidbody>();
         rigid.isKinematic = false;
@@ -72,7 +73,6 @@ public class PlatePoint : MonoBehaviour
         var col = plate.GetComponent<Collider>();
         col.isTrigger = true;
         plate = null;
-        _filled = false;
         Debug.Log("Set tag");
         onEmptied?.Invoke();
         yield return new WaitForSeconds(0.2f);
