@@ -12,12 +12,15 @@ public class LaserScript : MonoBehaviour
 	public AudioSource loading;
 	public AudioSource shooting;
 	public AudioSource cooldown;
+    public GameObject Fan;
+    
 
-	bool exit;
+    bool exit;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+        
 		Ps = GetComponent<ParticleSystem>();
 		line = GetComponent<LineRenderer>();
 		light = GetComponent<Light>();
@@ -44,13 +47,17 @@ public class LaserScript : MonoBehaviour
 	{
 		while (exit)
 		{
-			if (loading.isPlaying == false)
+            
+            Debug.Log("ja geht geht");
+            if (loading.isPlaying == false)
 			{
 				line.enabled = true;
 				light.enabled = true;
 
+                Fan.transform.localRotation *= Quaternion.AngleAxis(-1000 * Time.deltaTime, Vector3.up);
+                
 
-				if (shooting.isPlaying == false)
+                if (shooting.isPlaying == false)
 				{
 					shooting.Play();
 				}

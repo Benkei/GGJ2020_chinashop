@@ -5,26 +5,30 @@ using UnityEngine.Events;
 
 public class PlatePoint : MonoBehaviour
 {
+    public PlateBrain plate;
+    public Transform plateSocket;
     [SerializeField]
     bool _filled = false;
     public bool filled => _filled;
+
     public UnityEvent onFilled;
     public UnityEvent onEmptied;
-    PlateBrain plate;
     Collider triggerCol;
 
-    private void Start()
+    void Start()
     {
         triggerCol = GetComponent<Collider>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plate" && !other.attachedRigidbody.isKinematic && !filled)
+        Debug.Log("trigggerr");
+        if (other.tag == "Teller" && !other.attachedRigidbody.isKinematic && !filled)
         {
-            if (other.TryGetComponent(out plate))
+            if (other.TryGetComponent(out plate) && plate.BaseModel.activeSelf)
             {
                 other.attachedRigidbody.isKinematic = true;
+                other.tag = "Untagged";
                 _filled = true;
                 onFilled?.Invoke();
                 StartCoroutine(Snap(other));
@@ -39,13 +43,13 @@ public class PlatePoint : MonoBehaviour
         var startRot = other.transform.rotation;
         while (t < 1 && other.attachedRigidbody.isKinematic)
         {
-            other.transform.position = Vector3.Lerp(start, transform.position, t);
-            other.transform.rotation = Quaternion.Slerp(startRot, transform.rotation, t);
+            other.transform.position = Vector3.Lerp(start, plateSocket.position, t);
+            other.transform.rotation = Quaternion.Slerp(startRot, plateSocket.rotation, t);
             t += Time.deltaTime;
             yield return null;
         }
-        other.transform.position = transform.position;
-        other.transform.rotation = transform.rotation;
+        other.transform.position = plateSocket.position;
+        other.transform.rotation = plateSocket.rotation;
     }
 
     public void PushPlate()
@@ -55,6 +59,7 @@ public class PlatePoint : MonoBehaviour
 
     IEnumerator PushPlateRoutine()
     {
+        Debug.Log("Routine!");
         if (!filled || !triggerCol.enabled)
         {
             yield break;
@@ -62,10 +67,16 @@ public class PlatePoint : MonoBehaviour
         triggerCol.enabled = false;
         var rigid = plate.GetComponent<Rigidbody>();
         rigid.isKinematic = false;
-        rigid.AddForce(transform.forward * 100);
+        rigid.AddForce(transform.forward * 200);
+        plate.gameObject.tag = "Teller";
+        var col = plate.GetComponent<Collider>();
+        col.isTrigger = true;
         plate = null;
         _filled = false;
+        Debug.Log("Set tag");
         onEmptied?.Invoke();
+        yield return new WaitForSeconds(0.2f);
+        col.isTrigger = false;
         yield return new WaitForSeconds(1);
         triggerCol.enabled = true;
     }
