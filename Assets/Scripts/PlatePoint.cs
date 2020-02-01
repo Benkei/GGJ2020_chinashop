@@ -10,18 +10,25 @@ public class PlatePoint : MonoBehaviour
     public bool filled => _filled;
     public UnityEvent onFilled;
     public UnityEvent onEmptied;
-    Collider plate;
+    PlateBrain plate;
+    Collider triggerCol;
+
+    private void Start()
+    {
+        triggerCol = GetComponent<Collider>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Teller" && !other.attachedRigidbody.isKinematic && !filled)
+        if (other.tag == "Plate" && !other.attachedRigidbody.isKinematic && !filled)
         {
-            other.attachedRigidbody.isKinematic = true;
-            _filled = true;
-            other.tag = "Untagged";
-            plate = other;
-            onFilled?.Invoke();
-            StartCoroutine(Snap(other));
+            if (other.TryGetComponent(out plate))
+            {
+                other.attachedRigidbody.isKinematic = true;
+                _filled = true;
+                onFilled?.Invoke();
+                StartCoroutine(Snap(other));
+            }
         }
     }
 
@@ -39,5 +46,27 @@ public class PlatePoint : MonoBehaviour
         }
         other.transform.position = transform.position;
         other.transform.rotation = transform.rotation;
+    }
+
+    public void PushPlate()
+    {
+        StartCoroutine(PushPlateRoutine());
+    }
+
+    IEnumerator PushPlateRoutine()
+    {
+        if (!filled || !triggerCol.enabled)
+        {
+            yield break;
+        }
+        triggerCol.enabled = false;
+        var rigid = plate.GetComponent<Rigidbody>();
+        rigid.isKinematic = false;
+        rigid.AddForce(transform.forward * 100);
+        plate = null;
+        _filled = false;
+        onEmptied?.Invoke();
+        yield return new WaitForSeconds(1);
+        triggerCol.enabled = true;
     }
 }
