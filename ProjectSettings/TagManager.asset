@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Teller
   - Plate
+  - Elephant
   layers:
   - Default
   - TransparentFX

@@ -33,14 +33,15 @@ public class PlayerController : MonoBehaviour
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, transform.forward);
         controller.Move(rot * new Vector3(movementAxis.x, -gravity, movementAxis.y) * movementSpeed * Time.deltaTime);
         positionneu = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        if (position != positionneu && Step.isPlaying == false)
-        {
-            Step.Play();
-        }
-      if (grabbed)
+
+        if (grabbed)
         {
             grabbed.transform.position = SmoothGrab(grabStartPoint, grabPoint.position, Mathf.Min(1, Time.time - grabbedTime));
             grabbed.transform.rotation = Quaternion.Slerp(grabbed.transform.rotation, grabPoint.transform.rotation, Time.deltaTime * 10);
+        }
+        if (position != positionneu && Step.isPlaying == false)
+        {
+            Step.Play();
         }
     }
 
@@ -80,11 +81,11 @@ public class PlayerController : MonoBehaviour
                repair.StartRepair(hit.point);
 
                var root = hit.rigidbody.GetComponentInParent<PlateBrain>();
-
-                    grabbed = root.GetComponent<Rigidbody>();
-                    grabbed.isKinematic = true;
-                    grabStartPoint = root.transform.position;
-                    grabbedTime = Time.time;
+                    root.enabled = false;
+                grabbed = root.GetComponent<Rigidbody>();
+                grabbed.isKinematic = true;
+                grabStartPoint = root.transform.position;
+                grabbedTime = Time.time;
 
                 }
             }
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour
             if (grabbed)
             {
                 grabbed.isKinematic = false;
+                grabbed.GetComponent<PlateBrain>().enabled = true;
                 if (Time.time - grabbedTime > 1)
                 {
                     grabbed.AddForce(cameraTransform.forward * 1000);
