@@ -8,12 +8,12 @@ public class GunRoot : MonoBehaviour
 
 	public Vector3 anchor = new Vector3(1, 0, 1);
 
-
+	[ContextMenu("SetRoot")]
 	void Start()
 	{
-		var pos = camera.ViewportToWorldPoint(anchor);
-		var localPos = transform.InverseTransformPoint(pos);
+		var pos = camera.ViewportPointToRay(anchor);
+		//var localPos = transform.InverseTransformPoint(pos.GetPoint(anchor.z));
 
-		transform.localPosition = localPos;
+		transform.position = pos.GetPoint(anchor.z);
 	}
 }
