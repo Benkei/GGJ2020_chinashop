@@ -187,8 +187,8 @@ Transform:
   - {fileID: 1594517323}
   - {fileID: 921584515}
   - {fileID: 243330241}
-  - {fileID: 5006512735391083138}
   - {fileID: 1027829726}
+  - {fileID: 5006512735391083138}
   - {fileID: 350052835}
   - {fileID: 2025074626}
   - {fileID: 1967556664}
@@ -7260,6 +7260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UIGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 655262774513686128, guid: 30e66d3cbe8eb1f4ab55a9cf121883f9,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 655262774513686131, guid: 30e66d3cbe8eb1f4ab55a9cf121883f9,
         type: 3}
