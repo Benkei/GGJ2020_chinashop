@@ -77,6 +77,7 @@ public class PlatePoint : MonoBehaviour
         var rigid = p.GetComponent<Rigidbody>();
         rigid.isKinematic = false;
         rigid.AddForce(transform.forward * 200);
+      rigid.AddTorque(Random.onUnitSphere, ForceMode.Impulse);
         p.gameObject.tag = "Teller";
         var col = p.GetComponent<Collider>();
         col.isTrigger = true;
