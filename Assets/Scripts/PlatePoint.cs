@@ -25,11 +25,9 @@ public class PlatePoint : MonoBehaviour
         {
             if (other.TryGetComponent(out plate))
             {
-                Debug.Log("got brains");
                 
                 if (!plate.BaseModel.activeSelf)
                 {
-                    Debug.Log("not active");
                     plate = null;
                     return;
                 }
@@ -37,7 +35,6 @@ public class PlatePoint : MonoBehaviour
                 plate.enabled = false;
                 other.attachedRigidbody.isKinematic = true;
                 plate.ResetModel();
-                Debug.Log("kine");
                 other.tag = "Untagged";
                 StartCoroutine(Snap(other));
                 onFilled?.Invoke();
