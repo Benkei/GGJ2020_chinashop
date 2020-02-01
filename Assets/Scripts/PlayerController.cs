@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
         controller.Move(rot * new Vector3(movementAxis.x, -gravity, movementAxis.y) * movementSpeed * Time.deltaTime);
         if (grabbed)
         {
-            grabbed.transform.position = Vector3.Lerp(grabStartPoint, grabPoint.position, Mathf.Min(1, Time.time - grabbedTime));
+            grabbed.transform.position = SmoothGrab(grabStartPoint, grabPoint.position, Mathf.Min(1, Time.time - grabbedTime));
+            grabbed.transform.rotation = Quaternion.Slerp(grabbed.transform.rotation, grabPoint.transform.rotation, Time.deltaTime * 10);
         }
     }
 
@@ -72,4 +73,22 @@ public class PlayerController : MonoBehaviour
     {
         grabbed = null;
     }
+
+    static Vector3 SmoothGrab(Vector3 start, Vector3 target, float t)
+    {
+        return Vector3.Lerp(start, target, EaseInOutElastic(t));
+        if (t < 0.8f)
+        {
+            return Vector3.Lerp(start, target, Mathf.SmoothStep(0, 0.8f, t * 1 / 0.8f));
+        }
+
+        return Vector3.Lerp(start, target, t);
+    }
+
+    static float EaseInOutElastic(float k)
+    {
+        if ((k *= 2f) < 1f) return -0.5f * Mathf.Pow(2f, 10f * (k -= 1f)) * Mathf.Sin((k - 0.1f) * (2f * Mathf.PI) / 0.4f);
+        return Mathf.Pow(2f, -10f * (k -= 1f)) * Mathf.Sin((k - 0.1f) * (2f * Mathf.PI) / 0.4f) * 0.5f + 1f;
+    }
+
 }
