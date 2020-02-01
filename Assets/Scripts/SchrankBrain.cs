@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class SchrankBrain : MonoBehaviour
 {
-	List<PlatePoint> sockets;
+	public GameObject ChinaProps;
+	public Animation animation;
+
+	PlatePoint[] sockets;
 	[SerializeField]
 	int plateCount = 0;
 
 	void Start()
 	{
-		sockets = GetComponentsInChildren<PlatePoint>().ToList();
+		sockets = ChinaProps.GetComponentsInChildren<PlatePoint>();
 		foreach (var socket in sockets)
 		{
 			if (socket.filled) plateCount++;
@@ -39,6 +42,7 @@ public class SchrankBrain : MonoBehaviour
 			if (socket.filled)
 			{
 				socket.PushPlate();
+				animation.Play();
 				break;
 			}
 		}
