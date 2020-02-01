@@ -436,6 +436,11 @@ PrefabInstance:
       propertyPath: plateSocket
       value: 
       objectReference: {fileID: 7545381296959555041}
+    - target: {fileID: 6804620669661776463, guid: f339797daff10ce4e954043c04776e91,
+        type: 3}
+      propertyPath: plateType
+      value: Teller
+      objectReference: {fileID: 0}
     - target: {fileID: 6954037636853209137, guid: f339797daff10ce4e954043c04776e91,
         type: 3}
       propertyPath: m_Size.x

@@ -16,7 +16,7 @@ public class UIGameTimerBrain : MonoBehaviour
 		if (GameplayManager.currentTime != oldTime)
 		{
 			oldTime = GameplayManager.currentTime;
-			var span = System.TimeSpan.FromSeconds(GameplayManager.maxTime - GameplayManager.currentTime);
+			var span = System.TimeSpan.FromSeconds(Mathf.Max(0, GameplayManager.maxTime - GameplayManager.currentTime));
 			span = new System.TimeSpan(span.Days, span.Hours, span.Minutes, span.Seconds);
 
 			if (oldSpan != span)

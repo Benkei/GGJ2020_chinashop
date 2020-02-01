@@ -5,11 +5,10 @@ using UnityEngine.Events;
 
 public class PlatePoint : MonoBehaviour
 {
+    public string plateType;
     public PlateBrain plate;
     public Transform plateSocket;
-    [SerializeField]
-    bool _filled = false;
-    public bool filled => _filled;
+    public bool filled => plate != null;
 
     public UnityEvent onFilled;
     public UnityEvent onEmptied;
@@ -25,12 +24,19 @@ public class PlatePoint : MonoBehaviour
         Debug.Log("trigggerr");
         if (other.tag == "Teller" && !other.attachedRigidbody.isKinematic && !filled)
         {
-            if (other.TryGetComponent(out plate) && plate.BaseModel.activeSelf)
+            if (other.TryGetComponent(out plate))
             {
+                if (!plate.BaseModel.activeSelf || plate.type != plateType)
+                {
+                    plate = null;
+                    return;
+                }
+
+                plate.enabled = false;
                 other.attachedRigidbody.isKinematic = true;
+                plate.ResetModel();
                 other.tag = "Untagged";
                 StartCoroutine(Snap(other));
-                _filled = true;
                 onFilled?.Invoke();
             }
         }
@@ -64,15 +70,17 @@ public class PlatePoint : MonoBehaviour
         {
             yield break;
         }
-        _filled = false;
+        var p = plate;
+        plate = null;
         triggerCol.enabled = false;
-        var rigid = plate.GetComponent<Rigidbody>();
+        p.enabled = true;
+        var rigid = p.GetComponent<Rigidbody>();
         rigid.isKinematic = false;
         rigid.AddForce(transform.forward * 200);
-        plate.gameObject.tag = "Teller";
-        var col = plate.GetComponent<Collider>();
+        p.gameObject.tag = "Teller";
+        var col = p.GetComponent<Collider>();
         col.isTrigger = true;
-        plate = null;
+        
         Debug.Log("Set tag");
         onEmptied?.Invoke();
         yield return new WaitForSeconds(0.2f);
