@@ -6,6 +6,7 @@ using UnityEngine;
 public class SchrankBrain : MonoBehaviour
 {
 	public GameObject ChinaProps;
+	public Animation animation;
 
 	PlatePoint[] sockets;
 	[SerializeField]
@@ -41,6 +42,7 @@ public class SchrankBrain : MonoBehaviour
 			if (socket.filled)
 			{
 				socket.PushPlate();
+				animation.Play();
 				break;
 			}
 		}
