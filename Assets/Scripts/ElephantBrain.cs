@@ -11,19 +11,14 @@ public class ElephantBrain : MonoBehaviour
 	// Start is called before the first frame update
 	IEnumerator Start()
 	{
-
 		var agent = GetComponent<NavMeshAgent>();
-
-		var path = new NavMeshPath();
 
 		while (true)
 		{
 			var count = waypointsRoot.transform.childCount;
 			var child = waypointsRoot.transform.GetChild(Random.Range(0, count));
 
-			agent.CalculatePath(child.position, path);
-
-			agent.SetPath(path);
+			agent.destination = child.position;
 
 			yield return new WaitForSeconds(waitTimer);
 		}
