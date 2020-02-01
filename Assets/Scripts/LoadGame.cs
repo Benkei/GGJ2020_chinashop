@@ -11,7 +11,7 @@ public class LoadGame : MonoBehaviour, IPointerClickHandler
 
 		Debug.Log("Muhahahha");
 
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadScene("Scene1");
 
 	}
 
