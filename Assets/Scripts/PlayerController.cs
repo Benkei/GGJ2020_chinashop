@@ -71,9 +71,9 @@ public class PlayerController : MonoBehaviour
             }
             if (Physics.Raycast(
                camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2)),
-               out var hit))
+               out var hit, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
             {
-                Debug.Log(hit);
+                Debug.Log($"Ray: {hit.collider.name} {hit}");
                 if (hit.collider.CompareTag(plateTag))
                 {
               var repair = hit.rigidbody.GetComponentInParent<RepairPlateBrain>();
