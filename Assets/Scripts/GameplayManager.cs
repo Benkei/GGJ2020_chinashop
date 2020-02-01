@@ -17,7 +17,7 @@ public class GameplayManager : MonoBehaviour
 	public UnityEvent onGameOver;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 		startTime = Time.time;
 		maxPlateCount = 0;
