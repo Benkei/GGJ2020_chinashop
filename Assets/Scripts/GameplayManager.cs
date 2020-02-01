@@ -9,7 +9,7 @@ public class GameplayManager : MonoBehaviour
 	public static int plateCount = 0;
 
 	static float startTime;
-	public float _maxTime = 10;
+	public float _maxTime = 300;
 
 	public static float currentTime => Time.time - startTime;
 	public static float maxTime;
