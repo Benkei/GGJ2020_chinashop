@@ -81,7 +81,11 @@ public class PlayerController : MonoBehaviour
 
 	void OnFire(InputValue value)
 	{
-		Cursor.lockState = CursorLockMode.Locked;
+		if (Time.timeScale > Mathf.Epsilon * 5)
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+		
 		if (value.isPressed)
 		{
 			rayActive = true;
