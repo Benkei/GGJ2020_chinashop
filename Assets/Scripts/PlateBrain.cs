@@ -9,6 +9,7 @@ public class PlateBrain : MonoBehaviour
 	public GameObject BaseModel;
 	public GameObject BrokenModel;
 	public UnityEvent onBroke;
+	public AudioSource breakSound;
 
 	void Awake()
 	{
@@ -29,7 +30,10 @@ public class PlateBrain : MonoBehaviour
 	public void ExplodeModel(Vector3 contact)
 	{
 		BaseModel.SetActive(false);
+
 		gameObject.tag = "Teller";
+
+		breakSound?.Play();
 
 		if (!BrokenModel.activeSelf)
 		{
