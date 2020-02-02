@@ -15725,6 +15725,23 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5017365363473049095, guid: cfeace9eac097b447860463daf05b879,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 119928d35dfcfc94cbd016fcbd956394,
+        type: 2}
+    - target: {fileID: 5017365363473049095, guid: cfeace9eac097b447860463daf05b879,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285875412542545566, guid: cfeace9eac097b447860463daf05b879,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 40b3fec1e01754e4580fd75ac54809fe,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfeace9eac097b447860463daf05b879, type: 3}
 --- !u!224 &8507557017040888098 stripped

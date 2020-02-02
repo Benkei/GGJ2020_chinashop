@@ -405,6 +405,21 @@ PrefabInstance:
       propertyPath: m_Range
       value: 19.97
       objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.7411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6666667
+      objectReference: {fileID: 0}
     - target: {fileID: 5900824133593058911, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
         type: 3}
       propertyPath: m_Name
@@ -898,7 +913,7 @@ GameObject:
   - component: {fileID: 498556762}
   - component: {fileID: 498556761}
   - component: {fileID: 498556760}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Post-process Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,6 +1170,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Range
       value: 19.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.7411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6666667
       objectReference: {fileID: 0}
     - target: {fileID: 5900824133593058911, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
         type: 3}
@@ -2830,7 +2860,7 @@ ReflectionProbe:
   m_Mode: 1
   m_RefreshMode: 0
   m_TimeSlicingMode: 0
-  m_Resolution: 128
+  m_Resolution: 512
   m_UpdateFrequency: 0
   m_BoxSize: {x: 38.95, y: 10, z: 31.7}
   m_BoxOffset: {x: 0, y: 0, z: 0}
@@ -3060,7 +3090,7 @@ ReflectionProbe:
   m_Mode: 1
   m_RefreshMode: 0
   m_TimeSlicingMode: 0
-  m_Resolution: 128
+  m_Resolution: 512
   m_UpdateFrequency: 0
   m_BoxSize: {x: 38.95, y: 10, z: 31.7}
   m_BoxOffset: {x: 0, y: 0, z: 0}
@@ -3296,6 +3326,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Range
       value: 19.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.7411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523010788811108652, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6666667
       objectReference: {fileID: 0}
     - target: {fileID: 5900824133593058911, guid: 285f7a7a0e75cbb43b2bb3553ba40ebf,
         type: 3}
