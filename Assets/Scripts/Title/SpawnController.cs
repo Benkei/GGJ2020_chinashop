@@ -28,7 +28,6 @@ public class SpawnController : MonoBehaviour
             GameObject go = Instantiate(spawnPrefabs[Random.Range(0, 2)]);
             int count = spawnPoints.transform.childCount;
             Transform spawnPoint = spawnPoints.transform.GetChild(Random.Range(0, count));
-            Debug.Log(count);
             go.transform.position = spawnPoint.position;
 
             yield return new WaitForSeconds(timer);

@@ -33,7 +33,10 @@ public class PlateBrain : MonoBehaviour
 
 		gameObject.tag = "Teller";
 
-		breakSound?.Play();
+		if (breakSound != null)
+		{
+		breakSound.Play();
+		}
 
 		if (!BrokenModel.activeSelf)
 		{

@@ -251,6 +251,10 @@ MonoBehaviour:
   type: Teller
   BaseModel: {fileID: 6092844171205421244}
   BrokenModel: {fileID: 6092844172190658586}
+  onBroke:
+    m_PersistentCalls:
+      m_Calls: []
+  breakSound: {fileID: 0}
 --- !u!54 &2859729036076443961
 Rigidbody:
   m_ObjectHideFlags: 0
