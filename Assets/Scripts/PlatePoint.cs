@@ -25,7 +25,7 @@ public class PlatePoint : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigggerr");
+        //Debug.Log("trigggerr");
         if (other.tag == "Teller" && !other.attachedRigidbody.isKinematic && !filled)
         {
             if (other.TryGetComponent(out plate))
