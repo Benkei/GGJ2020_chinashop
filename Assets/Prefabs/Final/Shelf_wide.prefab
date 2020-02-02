@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4013106360923969618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.395, z: -0.617}
+  m_LocalPosition: {x: 0, y: 1.395, z: -1.236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4013106362308348569}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnOffset: {x: 0, y: 0, z: 0.6}
-  SpawnCount: 3
+  SpawnCount: 5
   ResourcesFolder: Prefabs/ShelfProps/
 --- !u!1 &4013106361017216363
 GameObject:
@@ -71,7 +71,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4013106361017216363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.054, z: -0.617}
+  m_LocalPosition: {x: 0, y: 2.054, z: -1.551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4013106362308348569}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnOffset: {x: 0, y: 0, z: 0.6}
-  SpawnCount: 3
+  SpawnCount: 6
   ResourcesFolder: Prefabs/ShelfProps/
 --- !u!1 &4013106361105651563
 GameObject:
@@ -117,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4013106361105651563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: -0.617}
+  m_LocalPosition: {x: 0, y: 0.7, z: -1.551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4013106362308348569}
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnOffset: {x: 0, y: 0, z: 0.6}
-  SpawnCount: 3
+  SpawnCount: 6
   ResourcesFolder: Prefabs/ShelfProps/
 --- !u!1 &4013106361280499534
 GameObject:
@@ -181,7 +181,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.5, z: 1.96}
+  m_Size: {x: 2, y: 2.5, z: 3.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4013106361280499532
 MonoBehaviour:
@@ -195,8 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647132fc3f382f649b5ede37a214be2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChinaProps: {fileID: 0}
-  animation: {fileID: 0}
+  ChinaProps: {fileID: 4013106362308348570}
+  animation: {fileID: 4013106361750768558}
   plateCount: 0
 --- !u!1 &4013106361320916316
 GameObject:
@@ -289,7 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4013106362146319242}
   m_Layer: 0
-  m_Name: ShelfNew
+  m_Name: Shelf_wide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,6 +404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: fe6b2485b5b4d11419876d0f68942d18,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: fe6b2485b5b4d11419876d0f68942d18,
         type: 3}

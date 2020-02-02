@@ -9,7 +9,7 @@ public class PropRowSpawnBrain : MonoBehaviour
 	public string ResourcesFolder = "Prefabs";
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		var prefabs = Resources.LoadAll<GameObject>(ResourcesFolder);
 
@@ -24,6 +24,7 @@ public class PropRowSpawnBrain : MonoBehaviour
 
 				go.transform.parent = transform;
 				go.transform.localPosition = begin;
+				go.transform.localRotation = Quaternion.identity;
 			}
 
 			begin += SpawnOffset;
