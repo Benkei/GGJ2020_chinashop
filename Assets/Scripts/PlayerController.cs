@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 	Vector3 positionneu;
 	float grabbedTime;
 	public AudioSource Step;
+	bool rayActive = false;
 
 	const string plateTag = "Teller";
 
@@ -40,6 +41,10 @@ public class PlayerController : MonoBehaviour
 		{
 			grabbed.transform.position = SmoothGrab(grabStartPoint, grabPoint.position, Mathf.Min(1, Time.time - grabbedTime));
 			grabbed.transform.rotation = Quaternion.Slerp(grabbed.transform.rotation, grabPoint.transform.rotation, Time.deltaTime * 10);
+		}
+		else if (rayActive)
+		{
+			CheckGrab();
 		}
 		if (position != positionneu && Step.isPlaying == false)
 		{
@@ -66,53 +71,60 @@ public class PlayerController : MonoBehaviour
 	{
 		if (value.isPressed)
 		{
-			if (grabbed)
-			{
-				return;
-			}
-
-			var ray = camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2));
-
-			var hits = Physics.RaycastAll(ray, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
-
-			if (hits?.Length > 0)
-			{
-				System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-				foreach (var hit in hits)
-				{
-					if (hit.collider.CompareTag(plateTag))
-					{
-						var repair = hit.rigidbody.GetComponentInParent<RepairPlateBrain>();
-
-						repair.StartRepair(hit.point);
-
-						var root = hit.rigidbody.GetComponentInParent<PlateBrain>();
-						root.enabled = false;
-						grabbed = root.GetComponent<Rigidbody>();
-						grabbed.isKinematic = true;
-						grabStartPoint = root.transform.position;
-						grabbedTime = Time.time;
-					}
-					else if (!hit.collider.isTrigger)
-					{
-						break;
-					}
-				}
-			}
-
+			rayActive = true;
+			CheckGrab();
 		}
 		else
 		{
+			rayActive = false;
 			if (grabbed)
 			{
 				grabbed.isKinematic = false;
 				grabbed.GetComponent<PlateBrain>().enabled = true;
-				if (Time.time - grabbedTime > 1)
+				if (Time.time - grabbedTime > 0.6f)
 				{
 					grabbed.AddForce(cameraTransform.forward * 1000);
 				}
 			}
 			grabbed = null;
+		}
+	}
+
+	void CheckGrab()
+	{
+		if (grabbed)
+		{
+			return;
+		}
+
+		var ray = camera.ScreenPointToRay(new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2));
+
+		var hits = Physics.RaycastAll(ray, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
+
+		if (hits?.Length > 0)
+		{
+			System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+			foreach (var hit in hits)
+			{
+				if (hit.collider.CompareTag(plateTag))
+				{
+					var repair = hit.rigidbody.GetComponentInParent<RepairPlateBrain>();
+
+					repair.StartRepair(hit.point);
+
+					var root = hit.rigidbody.GetComponentInParent<PlateBrain>();
+					root.enabled = false;
+					grabbed = root.GetComponent<Rigidbody>();
+					grabbed.isKinematic = true;
+					grabStartPoint = root.transform.position;
+					grabbedTime = Time.time;
+					rayActive = false;
+				}
+				else if (!hit.collider.isTrigger)
+				{
+					break;
+				}
+			}
 		}
 	}
 
