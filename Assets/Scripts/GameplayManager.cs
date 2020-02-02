@@ -34,6 +34,10 @@ public class GameplayManager : MonoBehaviour
 		currentElephantStamina = maxElephantStamina = _elephantStamina;
 		elephantEnrage = false;
 		stopTimer = false;
+	}
+
+	void Start()
+	{
 		foreach (var socket in FindObjectsOfType<PlatePoint>())
 		{
 			maxPlateCount++;
