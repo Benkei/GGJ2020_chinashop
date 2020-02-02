@@ -30,6 +30,12 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		controller = GetComponent<CharacterController>();
+		Cursor.lockState = CursorLockMode.Locked;
+	}
+
+	private void OnDisable()
+	{
+		Cursor.lockState = CursorLockMode.None;
 	}
 
 	void Update()
@@ -75,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
 	void OnFire(InputValue value)
 	{
+		Cursor.lockState = CursorLockMode.Locked;
 		if (value.isPressed)
 		{
 			rayActive = true;
@@ -147,6 +154,7 @@ public class PlayerController : MonoBehaviour
 
 	void OnEsc(InputValue value)
 	{
+		Cursor.lockState = CursorLockMode.None;
 		onEsc?.Invoke();
 	}
 }
