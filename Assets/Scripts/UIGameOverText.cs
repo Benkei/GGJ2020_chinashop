@@ -15,6 +15,10 @@ public class UIGameOverText : MonoBehaviour
         {
             text = $"Game Over!\n You were able to save {GameplayManager.plateCount} plates out of {GameplayManager.maxPlateCount}!";
         }
+        else if (GameplayManager.maxPlateCount - GameplayManager.plateCount >= 100)
+        {
+            text = $"Game Over!\n The Elephant broke to much plates";
+        }
         else
         {
             text = $"Congratulations!\n You tired out the Elephant before the shop opened!";

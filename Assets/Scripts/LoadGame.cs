@@ -10,7 +10,7 @@ public class LoadGame : MonoBehaviour, IPointerClickHandler
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		Debug.Log("Muhahahha");
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(sceneName);
 	}
 
 	void Start()

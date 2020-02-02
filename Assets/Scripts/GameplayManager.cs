@@ -68,6 +68,7 @@ public class GameplayManager : MonoBehaviour
 			stopTimer = true;
 			enabled = false;
 			gameOver = true;
+			return;
 		}
 		if (elephantEnrage)
 		{
@@ -79,7 +80,16 @@ public class GameplayManager : MonoBehaviour
 				enabled = false;
 				stoppedTime = currentTime;
 				stopTimer = true;
+				return;
 			}
+		}
+		if (maxPlateCount - plateCount >= 100)
+		{
+			onGameOver?.Invoke();
+			stoppedTime = currentTime;
+			stopTimer = true;
+			enabled = false;
+			gameOver = true;
 		}
 	}
 }
