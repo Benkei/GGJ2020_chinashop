@@ -70,6 +70,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2560196923634018347}
     m_Modifications:
+    - target: {fileID: 1047196955131669921, guid: a58f846af3423fc42b09363fd8f87bdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4682762199008052017, guid: a58f846af3423fc42b09363fd8f87bdc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -129,6 +134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MingVase
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599158988962638211, guid: a58f846af3423fc42b09363fd8f87bdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a58f846af3423fc42b09363fd8f87bdc, type: 3}
