@@ -10,12 +10,6 @@ public class MoonScript : MonoBehaviour
         StartCoroutine(moveMoon());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     private IEnumerator moveMoon()
     { 

@@ -8,7 +8,7 @@ public class ElephantBrain : MonoBehaviour
 	public GameObject waypointsRoot;
 	public float waitTimer = 10;
 
-	Animator animator;
+	public Animator animator;
 	NavMeshAgent agent;
 
 	float highPlateTime = 0;
@@ -18,7 +18,6 @@ public class ElephantBrain : MonoBehaviour
 
 	void Awake()
 	{
-		animator = GetComponent<Animator>();
 		agent = GetComponent<NavMeshAgent>();
 	}
 
