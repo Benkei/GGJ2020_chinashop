@@ -17,6 +17,10 @@ public class PlatePoint : MonoBehaviour
     void Start()
     {
         triggerCol = GetComponent<Collider>();
+        if (plate)
+        {
+            plate.onBroke.AddListener(OnBreak);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -36,6 +40,7 @@ public class PlatePoint : MonoBehaviour
                 other.attachedRigidbody.isKinematic = true;
                 plate.ResetModel();
                 other.tag = "Untagged";
+                plate.onBroke.AddListener(OnBreak);
                 StartCoroutine(Snap(other));
                 onFilled?.Invoke();
             }
@@ -77,16 +82,25 @@ public class PlatePoint : MonoBehaviour
         var rigid = p.GetComponent<Rigidbody>();
         rigid.isKinematic = false;
         rigid.AddForce(transform.forward * 200);
-      rigid.AddTorque(Random.onUnitSphere, ForceMode.Impulse);
+        rigid.AddTorque(Random.onUnitSphere, ForceMode.Impulse);
         p.gameObject.tag = "Teller";
+        p.onBroke.RemoveAllListeners();
         var col = p.GetComponent<Collider>();
         col.isTrigger = true;
         
-        Debug.Log("Set tag");
         onEmptied?.Invoke();
         yield return new WaitForSeconds(0.2f);
         col.isTrigger = false;
         yield return new WaitForSeconds(1);
         triggerCol.enabled = true;
+    }
+
+    void OnBreak()
+    {
+        var rigid = plate.GetComponent<Rigidbody>();
+        rigid.isKinematic = false;
+        plate.onBroke.RemoveAllListeners();
+        onEmptied?.Invoke();
+        plate = null;
     }
 }

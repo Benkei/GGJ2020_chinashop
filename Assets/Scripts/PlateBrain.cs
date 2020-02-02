@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlateBrain : MonoBehaviour
 {
 	public string type;
 	public GameObject BaseModel;
 	public GameObject BrokenModel;
+	public UnityEvent onBroke;
 
 	void Awake()
 	{
@@ -27,18 +29,20 @@ public class PlateBrain : MonoBehaviour
 	public void ExplodeModel(Vector3 contact)
 	{
 		BaseModel.SetActive(false);
+		gameObject.tag = "Teller";
 
 		if (!BrokenModel.activeSelf)
 		{
 			BrokenModel.SetActive(true);
 
-			var rigied = BrokenModel.GetComponent<Rigidbody>();
+			//var rigied = BrokenModel.GetComponent<Rigidbody>();
 			foreach (var item in BrokenModel.GetComponentsInChildren<Rigidbody>())
 			{
-				item.velocity = rigied.velocity;
-				item.angularVelocity = rigied.angularVelocity;
+				//item.velocity = rigied.velocity;
+				//item.angularVelocity = rigied.angularVelocity;
 				item.AddExplosionForce(100, contact, 100f);
 			}
+			onBroke?.Invoke();
 		}
 	}
 
