@@ -61,6 +61,7 @@ public class PlatePoint : MonoBehaviour
         }
         other.transform.position = plateSocket.position;
         other.transform.rotation = plateSocket.rotation;
+        plate.enabled = true;
     }
 
     public void PushPlate()
