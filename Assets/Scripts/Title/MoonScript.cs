@@ -21,7 +21,7 @@ public class MoonScript : MonoBehaviour
     { 
         while(true)
         {
-            transform.position += new Vector3(0.001f, 0.001f,0.00f);
+            transform.position += new Vector3(0.005f, 0.005f,0.00f);
             yield return new WaitForEndOfFrame();
 
         }
