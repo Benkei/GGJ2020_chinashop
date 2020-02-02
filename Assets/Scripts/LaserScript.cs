@@ -12,49 +12,79 @@ public class LaserScript : MonoBehaviour
 	public AudioSource loading;
 	public AudioSource shooting;
 	public AudioSource cooldown;
-	public GameObject Fan;
-
-
-	bool exit;
+    public int minFanSpeed;
+    public int maxFanSpeed;
+    int fanSpeed;
+    Fan fan;
+	bool fire;
 
 	void Start()
 	{
-
+        fan = GetComponent<Fan>();
 		Ps = GetComponent<ParticleSystem>();
 		line = GetComponent<LineRenderer>();
 		light = GetComponent<Light>();
 		line.enabled = false;
 		light.enabled = false;
-	}
+        fanSpeed = minFanSpeed;
+        
+    }
+    private void Update()
+    {
+        Debug.Log(fanSpeed);
+        Debug.Log(fire);
+        if (fire == true)
+        {
+            Debug.Log("Schuss");
+            if (fanSpeed <= maxFanSpeed)
+            {
+                fanSpeed+=8;
+            }            
+        }
+        else
+        {
+            Debug.Log("kein Schuss");
+            if (fanSpeed > minFanSpeed)
+            {
+                fanSpeed-=8;
+            }
+        }   
 
-	void OnFire(InputValue value)
+        if (minFanSpeed >= fanSpeed)
+        {
+            fan.fanrotation(minFanSpeed);
+        }
+        else
+        {
+            fan.fanrotation(fanSpeed);
+        }
+    }
+
+    void OnFire(InputValue value)
 	{
 		if (value.isPressed)
 		{
 			Ps.Play();
 			loading.Play();
-			exit = true;
+			fire = true;
 			StartCoroutine(FireLaser());
 		}
 		else
 		{
-			exit = false;
+			fire = false;
 		}
 	}
 	IEnumerator FireLaser()
 	{
 		var wait = new WaitForEndOfFrame();
-		while (exit)
+		while (fire)
 		{
 			if (loading.isPlaying == false)
 			{
 				line.enabled = true;
 				light.enabled = true;
 
-				Fan.transform.localRotation *= Quaternion.AngleAxis(-1000 * Time.deltaTime, Vector3.up);
-
-
-				if (shooting.isPlaying == false)
+                if (shooting.isPlaying == false)
 				{
 					shooting.Play();
 				}

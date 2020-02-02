@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7465409086652334248}
   - component: {fileID: 8495495953838781061}
   - component: {fileID: 2542981330542731082}
+  - component: {fileID: 2306392897949645363}
   m_Layer: 0
   m_Name: Shootpoint
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60529818472936163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.184, z: 0.879}
+  m_LocalPosition: {x: 0, y: 0.184, z: 0.648}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3611462830372775371}
@@ -148,7 +149,8 @@ MonoBehaviour:
   loading: {fileID: 1977804165896458480}
   shooting: {fileID: 8578504847305309953}
   cooldown: {fileID: 5494141861928509499}
-  Fan: {fileID: 8417907770988215253}
+  minFanSpeed: 100
+  maxFanSpeed: 1500
 --- !u!108 &7465409086652334248
 Light:
   m_ObjectHideFlags: 0
@@ -4932,6 +4934,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &2306392897949645363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60529818472936163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabc6e668d5e1d4ebf256e14154be4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gunfan: {fileID: 8417907770988215253}
 --- !u!1 &689056493547995315
 GameObject:
   m_ObjectHideFlags: 0
