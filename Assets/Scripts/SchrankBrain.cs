@@ -36,7 +36,7 @@ public class SchrankBrain : MonoBehaviour
 		{
 			return;
 		}
-		Debug.Log(other.name);
+		//Debug.Log(other.name);
 		foreach (var socket in sockets.OrderBy(x => Random.value))
 		{
 			if (socket.filled)
