@@ -8,6 +8,7 @@ public class UIGameOverText : MonoBehaviour
 {
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         string text;
 
         if (GameplayManager.currentTime >= GameplayManager.maxTime)

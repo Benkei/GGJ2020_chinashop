@@ -102,6 +102,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2639922270000210859}
     m_Modifications:
+    - target: {fileID: 4682762199008052016, guid: 59bb7afc938fa7b45b70a91724a90b04,
+        type: 3}
+      propertyPath: breakSound
+      value: 
+      objectReference: {fileID: 3696947336493130794}
     - target: {fileID: 4682762199008052017, guid: 59bb7afc938fa7b45b70a91724a90b04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -198,6 +203,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26dc5672feeaf844088569cbe56b5547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &3696947336493130794 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1723982911489290189, guid: 59bb7afc938fa7b45b70a91724a90b04,
+    type: 3}
+  m_PrefabInstance: {fileID: 2639922268739095527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2639922269415169410
 PrefabInstance:
   m_ObjectHideFlags: 0

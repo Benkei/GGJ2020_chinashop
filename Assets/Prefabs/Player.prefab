@@ -9660,6 +9660,7 @@ MonoBehaviour:
   cooldown: {fileID: 5494141861928509499}
   minFanSpeed: 100
   maxFanSpeed: 1500
+  Hitpoint: {fileID: 241748999}
 --- !u!108 &7465409086652334248
 Light:
   m_ObjectHideFlags: 0
