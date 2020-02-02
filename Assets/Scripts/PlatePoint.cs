@@ -71,7 +71,6 @@ public class PlatePoint : MonoBehaviour
 
     IEnumerator PushPlateRoutine()
     {
-        Debug.Log("Routine!");
         if (!filled || !triggerCol.enabled)
         {
             yield break;

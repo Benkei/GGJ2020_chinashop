@@ -14,6 +14,11 @@ public class GameplayManager : MonoBehaviour
 	public static float currentTime => Time.time - startTime;
 	public static float maxTime;
 
+	public float _elephantStamina = 100;
+	public static float currentElephantStamina;
+	public static float maxElephantStamina;
+	public static bool elephantEnrage;
+
 	public UnityEvent onGameOver;
 
     // Start is called before the first frame update
@@ -23,6 +28,8 @@ public class GameplayManager : MonoBehaviour
 		maxPlateCount = 0;
 		plateCount = 0;
 		maxTime = _maxTime;
+		currentElephantStamina = maxElephantStamina = _elephantStamina;
+		elephantEnrage = false;
 		foreach (var socket in FindObjectsOfType<PlatePoint>())
 		{
 			maxPlateCount++;
@@ -48,6 +55,15 @@ public class GameplayManager : MonoBehaviour
 		{
 			onGameOver?.Invoke();
 			enabled = false;
+		}
+		if (elephantEnrage)
+		{
+			currentElephantStamina = Mathf.Max(0, currentElephantStamina - Time.deltaTime);
+			if (currentElephantStamina <= 0)
+			{
+				onGameOver?.Invoke();
+				enabled = false;
+			}
 		}
 	}
 }
