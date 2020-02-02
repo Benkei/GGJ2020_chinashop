@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
 	void OnFire(InputValue value)
 	{
-		if (Time.timeScale > Mathf.Epsilon * 5)
+		if (Time.timeScale > Mathf.Epsilon * 5 && !GameplayManager.gameOver)
 		{
 			Cursor.lockState = CursorLockMode.Locked;
 		}

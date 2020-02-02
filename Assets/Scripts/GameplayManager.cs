@@ -23,6 +23,7 @@ public class GameplayManager : MonoBehaviour
 	public static bool elephantEnrage;
 
 	public UnityEvent onGameOver;
+	public static bool gameOver;
 
     // Start is called before the first frame update
     void Awake()
@@ -34,6 +35,7 @@ public class GameplayManager : MonoBehaviour
 		currentElephantStamina = maxElephantStamina = _elephantStamina;
 		elephantEnrage = false;
 		stopTimer = false;
+		gameOver = false;
 	}
 
 	void Start()
@@ -65,16 +67,18 @@ public class GameplayManager : MonoBehaviour
 			stoppedTime = currentTime;
 			stopTimer = true;
 			enabled = false;
+			gameOver = true;
 		}
 		if (elephantEnrage)
 		{
 			currentElephantStamina = Mathf.Max(0, currentElephantStamina - Time.deltaTime);
-			stoppedTime = currentTime;
-			stopTimer = true;
 			if (currentElephantStamina <= 0)
 			{
 				onGameOver?.Invoke();
+				gameOver = true;
 				enabled = false;
+				stoppedTime = currentTime;
+				stopTimer = true;
 			}
 		}
 	}
