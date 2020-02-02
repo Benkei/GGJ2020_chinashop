@@ -14,12 +14,17 @@ public class LaserScript : MonoBehaviour
 	public AudioSource cooldown;
     public int minFanSpeed;
     public int maxFanSpeed;
+    public ParticleSystem Hitpoint;
+    Vector3 hitpoint;
     int fanSpeed;
+
+    
     Fan fan;
 	bool fire;
 
 	void Start()
 	{
+
         fan = GetComponent<Fan>();
 		Ps = GetComponent<ParticleSystem>();
 		line = GetComponent<LineRenderer>();
@@ -27,15 +32,15 @@ public class LaserScript : MonoBehaviour
 		line.enabled = false;
 		light.enabled = false;
         fanSpeed = minFanSpeed;
-        
+        Hitpoint.Stop();
+
     }
     private void Update()
     {
-        Debug.Log(fanSpeed);
-        Debug.Log(fire);
+      
         if (fire == true)
         {
-            Debug.Log("Schuss");
+            
             if (fanSpeed <= maxFanSpeed)
             {
                 fanSpeed+=8;
@@ -43,7 +48,7 @@ public class LaserScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("kein Schuss");
+            
             if (fanSpeed > minFanSpeed)
             {
                 fanSpeed-=8;
@@ -72,13 +77,16 @@ public class LaserScript : MonoBehaviour
 		else
 		{
 			fire = false;
-		}
+            
+        }
 	}
 	IEnumerator FireLaser()
 	{
 		var wait = new WaitForEndOfFrame();
 		while (fire)
 		{
+                        
+
 			if (loading.isPlaying == false)
 			{
 				line.enabled = true;
@@ -92,17 +100,32 @@ public class LaserScript : MonoBehaviour
 				line.material.mainTextureOffset = new Vector2(0, Time.time);
 				Ray ray = new Ray(transform.position, transform.forward);
 				RaycastHit hit;
+                line.SetPosition(0, ray.origin);
 
-				line.SetPosition(0, ray.origin);
 
-				if (Physics.Raycast(ray, out hit, laserRange))
+                if (Physics.Raycast(ray, out hit, laserRange))
+                {
+         
+                    line.SetPosition(1, hit.point);
+                    hitpoint = hit.point;
+                    Hitpoint.transform.position = hitpoint;
+                    Hitpoint.transform.rotation = Quaternion.LookRotation(hit.normal);
+                    if (!Hitpoint.isPlaying)
+                    {
+                       Hitpoint.Play();
+                    }
 
-					line.SetPosition(1, hit.point);
+                }
+                else
+                {
+                    line.SetPosition(1, ray.GetPoint(laserRange));
+                    Hitpoint.Stop();
+                }
 
-				else
-					line.SetPosition(1, ray.GetPoint(laserRange));
+               
 
-				yield return wait;
+
+                yield return wait;
 			}
 			yield return null;
 
@@ -115,5 +138,6 @@ public class LaserScript : MonoBehaviour
 		line.enabled = false;
 		light.enabled = false;
 		Ps.Stop();
-	}
+        Hitpoint.Stop();
+    }
 }
