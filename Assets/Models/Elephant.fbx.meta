@@ -12,7 +12,12 @@ ModelImporter:
   - first:
       74: 2072774857661664495
     second: Walkcycle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Recovered_Tool
+    second: {fileID: 2100000, guid: e5a15a67de664ae43b7d236aee4501e3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
