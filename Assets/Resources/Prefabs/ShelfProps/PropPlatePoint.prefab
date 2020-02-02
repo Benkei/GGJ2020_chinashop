@@ -102,6 +102,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2639922270000210859}
     m_Modifications:
+    - target: {fileID: 1723982911489290189, guid: 59bb7afc938fa7b45b70a91724a90b04,
+        type: 3}
+      propertyPath: MinDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4682762199008052016, guid: 59bb7afc938fa7b45b70a91724a90b04,
         type: 3}
       propertyPath: breakSound
