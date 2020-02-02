@@ -88,15 +88,4 @@ public class ElephantBrain : MonoBehaviour
 		agent.speed = normalSpeed;
 		GameplayManager.elephantEnrage = false;
 	}
-
-	//void OnTriggerEnter(Collider other)
-	//{
-	//	//Debug.Log(other.name);
-	//}
-
-	private void OnGUI()
-	{
-		GUILayout.Label(GameplayManager.elephantEnrage ? "Enrage" : "Normal");
-		GUILayout.Label($"Stamina: {GameplayManager.currentElephantStamina}/100");
-	}
 }
