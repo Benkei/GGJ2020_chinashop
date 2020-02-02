@@ -13,6 +13,9 @@ public class GameplayManager : MonoBehaviour
 
 	public static float currentTime => Time.time - startTime;
 	public static float maxTime;
+	public static float timerPercentage => (stopTimer ? stoppedTime : currentTime) / maxTime;
+	static bool stopTimer;
+	static float stoppedTime;
 
 	public float _elephantStamina = 100;
 	public static float currentElephantStamina;
@@ -30,6 +33,7 @@ public class GameplayManager : MonoBehaviour
 		maxTime = _maxTime;
 		currentElephantStamina = maxElephantStamina = _elephantStamina;
 		elephantEnrage = false;
+		stopTimer = false;
 		foreach (var socket in FindObjectsOfType<PlatePoint>())
 		{
 			maxPlateCount++;
@@ -54,11 +58,15 @@ public class GameplayManager : MonoBehaviour
 		if (maxTime - currentTime <= 0)
 		{
 			onGameOver?.Invoke();
+			stoppedTime = currentTime;
+			stopTimer = true;
 			enabled = false;
 		}
 		if (elephantEnrage)
 		{
 			currentElephantStamina = Mathf.Max(0, currentElephantStamina - Time.deltaTime);
+			stoppedTime = currentTime;
+			stopTimer = true;
 			if (currentElephantStamina <= 0)
 			{
 				onGameOver?.Invoke();
