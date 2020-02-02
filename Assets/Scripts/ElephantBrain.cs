@@ -12,8 +12,8 @@ public class ElephantBrain : MonoBehaviour
 	NavMeshAgent agent;
 
 	float highPlateTime = 0;
-	public float enrageStartPercentage = 0.95f;
-	public float enrageEndPercentage = 0.93f;
+	public int enrageStartPlates = 10;
+	public int enrageEndPlates = 15;
 	public float enrageSpeedIncrease = 1.5f;
 
 	void Awake()
@@ -56,7 +56,7 @@ public class ElephantBrain : MonoBehaviour
 		}
 
 		//if (!enrage)
-		if (GameplayManager.plateCount * 1.0f / GameplayManager.maxPlateCount >= enrageStartPercentage && !GameplayManager.elephantEnrage)
+		if (GameplayManager.maxPlateCount - GameplayManager.plateCount < enrageStartPlates && !GameplayManager.elephantEnrage)
 		{
 			highPlateTime += Time.deltaTime;
 			if (highPlateTime > 10 && GameplayManager.currentElephantStamina > 0)
@@ -83,7 +83,7 @@ public class ElephantBrain : MonoBehaviour
 		GameplayManager.elephantEnrage = true;
 		float normalSpeed = agent.speed;
 		agent.speed *= enrageSpeedIncrease;
-		yield return new WaitWhile(() => GameplayManager.plateCount * 1.0f / GameplayManager.maxPlateCount > enrageEndPercentage && GameplayManager.currentElephantStamina > 0);
+		yield return new WaitWhile(() => GameplayManager.maxPlateCount - GameplayManager.plateCount < enrageEndPlates && GameplayManager.currentElephantStamina > 0);
 		Debug.Log("End of Enrage");
 		agent.speed = normalSpeed;
 		GameplayManager.elephantEnrage = false;
