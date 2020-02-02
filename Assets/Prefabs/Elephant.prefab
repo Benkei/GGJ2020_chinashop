@@ -49,7 +49,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6155481173237076800, guid: 7ffdef76b7805e049bacd8a43bd12e4f, type: 3}
+  - {fileID: 2100000, guid: e5a15a67de664ae43b7d236aee4501e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,3 +203,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointsRoot: {fileID: 0}
   waitTimer: 5
+  enrageStartPercentage: 0.95
+  enrageEndPercentage: 0.93
+  enrageSpeedIncrease: 1.5
