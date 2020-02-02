@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 	public Transform grabPoint;
 	public float movementSpeed = 5;
 	public float gravity = 20.0f;
+	public UnityEvent onEsc;
 	float yaw;
 	float pitch;
 	Vector3 movementAxis;
@@ -54,6 +56,10 @@ public class PlayerController : MonoBehaviour
 
 	void OnLook(InputValue value)
 	{
+		if (Time.timeScale < Mathf.Epsilon * 10)
+		{
+			return;
+		}
 		var axis = value.Get<Vector2>();
 		yaw += axis.x;
 		pitch += axis.y * -1;
@@ -139,4 +145,8 @@ public class PlayerController : MonoBehaviour
 		return Mathf.Pow(2f, -10f * (k -= 1f)) * Mathf.Sin((k - 0.1f) * (2f * Mathf.PI) / 0.4f) * 0.5f + 1f;
 	}
 
+	void OnEsc(InputValue value)
+	{
+		onEsc?.Invoke();
+	}
 }
